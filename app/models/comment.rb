@@ -14,6 +14,8 @@
 class Comment < ApplicationRecord
   validates :author, :post, :content, presence: true
 
+  has_many :votes, as: :votable
+
   belongs_to :author,
     primary_key: :id,
     foreign_key: :author_id,

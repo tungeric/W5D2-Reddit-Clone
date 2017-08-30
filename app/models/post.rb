@@ -15,6 +15,7 @@ class Post < ApplicationRecord
   validates :title, :author, presence: true
   validates :subs, presence: { message: 'must have at least one sub' }
 
+  has_many :votes, as: :votable
 
   belongs_to :author,
     primary_key: :id,
