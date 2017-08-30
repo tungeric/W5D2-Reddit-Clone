@@ -1,0 +1,21 @@
+<h1><%=@sub.title%></h1>
+<a><%=@sub.description%></a>
+<br>
+<% if @sub.moderator == current_user %>
+  <%= link_to "Edit Sub", edit_sub_url %>
+  <br>
+<% end %>
+<%= render '/shared/errors' %>
+<br><br>
+
+<h2>Posts</h2>
+<%= link_to "Add Post", new_post_url %>
+<section class="sub-posts">
+<ul>
+  <% @sub.posts.each do |post| %>
+  <li><%= link_to post.title, post_url(post) %></li>
+  <% end %>
+</ul>
+</section>
+
+<%= link_to "Back To Sub Index", subs_url %>

@@ -1,0 +1,25 @@
+<% if @comment.parent_comment.nil? %>
+  <% header_string = @comment.post.title %>
+<% else %>
+  <% header_string = @comment.parent_comment %>
+<% end %>
+<h2>Comment reply to <%=header_string%></h2>
+<li><%= @comment.author.username %>
+--- <%=@comment.content %></li>
+<form class="" action="<%=comments_url%>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <input type="hidden" name="comment[post_id]" value="<%=@comment.post_id%>">
+  <input type="hidden" name="comment[parent_comment_id]" value="<%=@comment.id%>">
+  <label>Reply:
+  <textarea name="comment[content]"></textarea>
+  </label>
+  <input type="submit" name="" value="Reply">
+</form>
+<br><br>
+<ul>
+  <% @comment.post.comments_by_parent[@comment].each do |child| %>
+    <li><%= render("comments/comment",
+            comment: child,
+            comments_by_parent: @comment.post.comments_by_parent) %></li>
+  <% end %>
+</ul>

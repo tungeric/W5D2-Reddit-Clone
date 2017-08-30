@@ -1,0 +1,9 @@
+<h1>Subs Index</h1>
+
+<%= render '/shared/errors' %>
+<ul>
+<% @subs.each do |sub| %>
+  <li><%=link_to sub.title, sub_url(sub)%></li>
+<% end %>
+</ul>
+<%= link_to "Add New Sub", new_sub_url %>

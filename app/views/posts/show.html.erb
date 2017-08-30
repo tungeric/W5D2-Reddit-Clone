@@ -1,0 +1,29 @@
+<h2><%=link_to @post.title, "http://#{@post.url}"%></h2>
+<a><%=@post.content%></a><br>
+<% if @post.author == current_user %>
+  <%= link_to "Edit Post", edit_post_url %>
+  <br>
+<% end %>
+
+
+  <h2>Comments</h2>
+
+  <form class="" action="<%=comments_url%>" method="post">
+    <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+    <input type="hidden" name="comment[post_id]" value="<%=@post.id%>">
+    <label>Comment:
+    <textarea name="comment[content]"></textarea>
+    </label>
+    <input type="submit" name="" value="Add Comment">
+  </form>
+  <br><br>
+
+  <ul>
+    <% @post.comments_by_parent[nil].each do |child| %>
+      <li><%= render("comments/comment",
+              comment: child,
+              comments_by_parent: @post.comments_by_parent) %></li>
+    <% end %>
+  </ul>
+
+  <br><br>

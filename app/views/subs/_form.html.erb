@@ -1,0 +1,17 @@
+<% action_url = sub.persisted? ? sub_url(sub) : subs_url %>
+
+<%= render '/shared/errors' %>
+<form class="" action="<%=action_url%>" method="post">
+  <% if !sub.id.nil? && action_url == sub_url(sub) %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+  <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
+  <label>Sub Name:
+    <input type="title" name="sub[title]" value="<%=sub.title%>">
+  </label>
+  <label>Description:
+    <textarea name="sub[description]"><%=sub.description%></textarea>
+  </label>
+  <input type="submit" name="" value="<%=action_url == subs_url ? 'Create Sub' : 'Update Sub'%>">
+
+</form>
