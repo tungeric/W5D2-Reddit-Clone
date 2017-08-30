@@ -6,6 +6,9 @@
 <h2>Comment reply to <%=header_string%></h2>
 <li><%= @comment.author.username %>
 --- <%=@comment.content %></li>
+Karma: <%=@comment.sum_votes%>
+<%= button_to "Upvote", upvote_comment_url(@comment) %>
+<%= button_to "Downvote", downvote_comment_url(@comment) %>
 <form class="" action="<%=comments_url%>" method="post">
   <input type="hidden" name="authenticity_token" value="<%=form_authenticity_token%>">
   <input type="hidden" name="comment[post_id]" value="<%=@comment.post_id%>">

@@ -27,4 +27,36 @@ class ApplicationController < ActionController::Base
       redirect_to new_session_url
     end
   end
+
+  def upvote
+    @vote = Vote.find_by(
+                user_id: current_user.id,
+                votable_id: params[:id],
+                votable_type: params[:controller].capitalize.singularize
+                ) ||
+    Vote.new(
+    user_id: current_user.id,
+    votable_id: params[:id],
+    votable_type: params[:controller].capitalize.singularize
+    )
+    @vote.value = 1
+    @vote.save
+    redirect_back(fallback_location: subs_url)
+  end
+
+  def downvote
+    @vote = Vote.find_by(
+                user_id: current_user.id,
+                votable_id: params[:id],
+                votable_type: params[:controller].capitalize.singularize
+                ) ||
+    Vote.new(
+    user_id: current_user.id,
+    votable_id: params[:id],
+    votable_type: params[:controller].capitalize.singularize
+    )
+    @vote.value = -1
+    @vote.save
+    redirect_back(fallback_location: subs_url)
+  end
 end

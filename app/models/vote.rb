@@ -12,7 +12,9 @@
 #
 
 class Vote < ApplicationRecord
-  validates :value, presence: true
+  validates :value, :user, presence: true
+  validates :user, uniqueness: { scope: [:votable] }
 
   belongs_to :votable, polymorphic: true
+  belongs_to :user
 end

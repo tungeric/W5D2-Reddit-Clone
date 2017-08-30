@@ -1,4 +1,7 @@
 <%="#{comment.author.username} - #{comment.content}" %>
+Karma: <%=comment.sum_votes%>
+<%= button_to "Upvote", upvote_comment_url(comment) %>
+<%= button_to "Downvote", downvote_comment_url(comment) %>
 <%= link_to "Show Comment", comment_url(comment) %>
   <% if !comments_by_parent[comment].empty? %>
     <ul>

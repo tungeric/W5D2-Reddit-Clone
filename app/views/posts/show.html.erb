@@ -1,4 +1,8 @@
 <h2><%=link_to @post.title, "http://#{@post.url}"%></h2>
+Karma: <%=@post.sum_votes%>
+<%= button_to "Upvote", upvote_post_url(@post) %>
+<%= button_to "Downvote", downvote_post_url(@post) %>
+<br>
 <a><%=@post.content%></a><br>
 <% if @post.author == current_user %>
   <%= link_to "Edit Post", edit_post_url %>
