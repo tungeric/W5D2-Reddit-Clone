@@ -1,5 +1,5 @@
 <h2><%=link_to @post.title, "http://#{@post.url}"%></h2>
-Karma: <%=@post.sum_votes%>
+<a class="karma">Karma: <%=@post.sum_votes%></a>
 <%= button_to "Upvote", upvote_post_url(@post) %>
 <%= button_to "Downvote", downvote_post_url(@post) %>
 <br>

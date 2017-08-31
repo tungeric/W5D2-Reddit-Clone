@@ -13,7 +13,13 @@
 <section class="sub-posts">
 <ul>
   <% @sub.posts.each do |post| %>
-  <li><%= link_to post.title, post_url(post) %></li>
+  <li><%= link_to post.title, post_url(post) %>
+  <br><%= post.content %>
+  </li>
+  <a class="karma">Karma: <%=post.sum_votes%></a>
+
+  <%= link_to '<i class="fa fa-arrow-up"></i>'.html_safe, upvote_post_url(post), method: :post %>
+  <%= link_to '<i class="fa fa-arrow-down"></i>'.html_safe, downvote_post_url(post), method: :post %>
   <% end %>
 </ul>
 </section>
